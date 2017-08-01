@@ -19,6 +19,7 @@
         <CommandBinding Command="local:MainWindow.VideoOutputCommand" CanExecute="GameBoyExistsCanExecute" Executed="VideoOutputCommandOnExecuted" />
         <CommandBinding Command="local:MainWindow.SourceCodeCommand" Executed="SourceCodeCommandOnExecuted" />
         <CommandBinding Command="local:MainWindow.AboutCommand" Executed="AboutCommandOnExecuted" />
+        <CommandBinding Command="local:MainWindow.ControlMapperCommand" Executed="ControlMapperCommandOnExecuted" />
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -47,6 +48,8 @@
                     <MenuItem.Items>
                         <MenuItem Header="Video output" Command="local:MainWindow.VideoOutputCommand"/>
                         <MenuItem Header="Virtual keypad" Command="local:MainWindow.KeyPadCommand"/>
+                        <Separator></Separator>
+                        <MenuItem Header="Control mapper" Command="local:MainWindow.ControlMapperCommand"/>
                     </MenuItem.Items>
                 </MenuItem>
                 <MenuItem Header="Help">

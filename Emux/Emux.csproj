@@ -60,6 +60,9 @@
     <Compile Include="AboutDialog.xaml.cs">
       <DependentUpon>AboutDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ControlMapper.xaml.cs">
+      <DependentUpon>ControlMapper.xaml</DependentUpon>
+    </Compile>
     <Compile Include="KeypadWindow.xaml.cs">
       <DependentUpon>KeypadWindow.xaml</DependentUpon>
     </Compile>
@@ -67,6 +70,10 @@
       <DependentUpon>VideoWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AboutDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlMapper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -95,15 +95,26 @@ namespace Emux
                 new KeyGesture(Key.F1)
             }));
 
+        public static readonly RoutedUICommand ControlMapperCommand = new RoutedUICommand(
+            "Remap the controls.",
+            "Control Mapper",
+            typeof(MainWindow),
+            new InputGestureCollection(new[]
+            {
+                new KeyGesture(Key.F8)
+            }));
+
         private GameBoy.GameBoy _gameBoy;
         private readonly VideoWindow _videoWindow;
         private readonly KeypadWindow _keypadWindow;
+        private readonly ControlMapper _controlMapperWindow;
 
         public MainWindow()
         {
             InitializeComponent();
             _videoWindow = new VideoWindow();
             _keypadWindow = new KeypadWindow();
+            _controlMapperWindow = new ControlMapper();
         }
 
         public void RefreshView()
@@ -248,6 +259,11 @@ namespace Emux
             _videoWindow.Show();
         }
 
+        private void ControlMapperCommandOnExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            _controlMapperWindow.Show();
+        }
+
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
             _gameBoy?.Terminate();
@@ -256,5 +272,6 @@ namespace Emux
             _videoWindow.Close();
             _keypadWindow.Close();
         }
+
     }
 }
