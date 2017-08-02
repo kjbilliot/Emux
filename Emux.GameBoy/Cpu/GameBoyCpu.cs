@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emux.GameBoy.Input;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -182,6 +183,9 @@ namespace Emux.GameBoy.Cpu
                 var nextInstruction = ReadNextInstruction();
                 cycles = nextInstruction.Execute(_device);
             }
+
+            // Update IO.
+            IoManager.Update();
 
             // Check for interrupts.
             bool interrupted = false;

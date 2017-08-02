@@ -28,6 +28,7 @@ namespace Emux
             [Key.Enter] = GameBoyPadButton.Start,
             [Key.LeftShift] = GameBoyPadButton.Select
         };
+
         private readonly Timer _frameRateTimer = new Timer(1000);
 
         private GameBoy.GameBoy _device;
