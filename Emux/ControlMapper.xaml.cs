@@ -42,6 +42,13 @@ namespace Emux
             }
             else
             {
+                keyButtons.ForEach(btn =>
+                {
+                    if (Enum.TryParse(btn.Content.ToString(), out Key key))
+                    {
+                        //IoManager.InputMap[key] 
+                    }
+                });
                 Hide();
             }
         }

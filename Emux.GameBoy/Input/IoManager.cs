@@ -12,36 +12,42 @@ namespace Emux.GameBoy.Input
 {
     public class IoManager
     {
-        public static Dictionary<Key, GameBoyPadButton> InputMap = new Dictionary<Key, GameBoyPadButton>()
+        public static Dictionary<GameBoyPadButton, Key> InputMap = new Dictionary<GameBoyPadButton, Key>()
         {
-            {Key.Up,        Up },
-            {Key.Down,      Down },
-            {Key.Left,      Left },
-            {Key.Right,     Right },
-            {Key.X,         A },
-            {Key.Z,         B },
-            {Key.Enter,     Start },
-            {Key.LeftShift, Select }
+            {Up,     Key.Up },
+            {Down,   Key.Down },
+            {Left,   Key.Left },
+            {Right,  Key.Right },
+            {A,      Key.X },
+            {B,      Key.Z },
+            {Start,  Key.Enter },
+            {Select, Key.LeftShift },
         };
 
         private GameBoy vm;
+        private Thread ioThread;
 
         public IoManager(GameBoy vm)
         {
             this.vm = vm;
-            Thread ioThread = new Thread(Update);
+            ioThread = new Thread(Update);
             ioThread.SetApartmentState(ApartmentState.STA);
             ioThread.Start();
+        }
+
+        public void StopThread()
+        {
+            ioThread.Abort();
         }
 
         public void Update()
         {
             while (true)
             {
-                foreach (Key k in InputMap.Keys)
+                foreach (GameBoyPadButton k in InputMap.Keys)
                 {
-                    if (IsKeyDown(k)) vm.KeyPad.PressedButtons |= InputMap[k];
-                    else vm.KeyPad.PressedButtons &= ~InputMap[k];
+                    if (IsKeyDown(InputMap[k])) vm.KeyPad.PressedButtons |= k;
+                    else vm.KeyPad.PressedButtons &= ~k;
                 }
             }
         }

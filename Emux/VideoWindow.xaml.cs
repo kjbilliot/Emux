@@ -17,17 +17,6 @@ namespace Emux
     public partial class VideoWindow : IVideoOutput
     {
         private readonly WriteableBitmap _bitmap = new WriteableBitmap(GameBoyGpu.FrameWidth, GameBoyGpu.FrameHeight, 96, 96, PixelFormats.Bgr24, null);
-        private readonly IDictionary<Key, GameBoyPadButton> _keyMapping = new Dictionary<Key, GameBoyPadButton>()
-        {
-            [Key.Up] = GameBoyPadButton.Up,
-            [Key.Down] = GameBoyPadButton.Down,
-            [Key.Left] = GameBoyPadButton.Left,
-            [Key.Right] = GameBoyPadButton.Right,
-            [Key.X] = GameBoyPadButton.A,
-            [Key.Z] = GameBoyPadButton.B,
-            [Key.Enter] = GameBoyPadButton.Start,
-            [Key.LeftShift] = GameBoyPadButton.Select
-        };
 
         private readonly Timer _frameRateTimer = new Timer(1000);
 
@@ -73,8 +62,6 @@ namespace Emux
                 VideoImage.Source = _bitmap;
             });
         }
-
-
 
         private void VideoWindowOnClosing(object sender, CancelEventArgs e)
         {

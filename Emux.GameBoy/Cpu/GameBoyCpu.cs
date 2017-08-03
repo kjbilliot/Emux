@@ -244,6 +244,7 @@ namespace Emux.GameBoy.Cpu
             _frameTimer.Stop();
             _continueSignal.Reset();
             _terminateSignal.Set();
+            _ioManager.StopThread();
         }
 
         private Z80Instruction ReadNextInstruction()
