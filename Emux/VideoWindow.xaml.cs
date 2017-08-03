@@ -74,24 +74,7 @@ namespace Emux
             });
         }
 
-        private void VideoWindowOnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-                Device.Cpu.EnableFrameLimit = false;
-            GameBoyPadButton button;
-            if (_keyMapping.TryGetValue(e.Key, out button))
-                Device.KeyPad.PressedButtons |= button;
-        }
 
-
-        private void VideoWindowOnKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-                Device.Cpu.EnableFrameLimit = true;
-            GameBoyPadButton button;
-            if (_keyMapping.TryGetValue(e.Key, out button))
-                Device.KeyPad.PressedButtons &= ~button;
-        }
 
         private void VideoWindowOnClosing(object sender, CancelEventArgs e)
         {

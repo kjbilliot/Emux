@@ -5,6 +5,7 @@ using Emux.GameBoy.Graphics;
 using Emux.GameBoy.Input;
 using Emux.GameBoy.Memory;
 using Emux.GameBoy.Timer;
+using System;
 
 namespace Emux.GameBoy
 {

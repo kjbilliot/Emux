@@ -31,6 +31,7 @@ namespace Emux.GameBoy.Cpu
         private readonly GameBoy _device;
         private readonly ManualResetEvent _continueSignal = new ManualResetEvent(false);
         private readonly ManualResetEvent _terminateSignal = new ManualResetEvent(false);
+        private readonly IoManager _ioManager;
         private ulong _ticks;
         private bool _break = true;
         private bool _halt = false;
@@ -58,6 +59,8 @@ namespace Emux.GameBoy.Cpu
                 IsBackground = true
             }.Start();
 
+            _ioManager = new IoManager(_device);
+            
             _frameTimer = new NativeTimer((timerid, msg, user, dw1, dw2) =>
             {
                 _frameStartSignal.Set();
@@ -183,9 +186,6 @@ namespace Emux.GameBoy.Cpu
                 var nextInstruction = ReadNextInstruction();
                 cycles = nextInstruction.Execute(_device);
             }
-
-            // Update IO.
-            IoManager.Update();
 
             // Check for interrupts.
             bool interrupted = false;

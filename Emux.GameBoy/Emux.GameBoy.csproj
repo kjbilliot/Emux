@@ -32,6 +32,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,6 +41,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Audio\GameBoySpu.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="Cpu\GameBoyAlu.cs" />
     <Compile Include="Cpu\InterruptFlags.cs" />
     <Compile Include="Cpu\RegisterFlags.cs" />
+    <Compile Include="Input\IoManager.cs" />
     <Compile Include="NativeTimer.cs" />
     <Compile Include="Timer\GameBoyTimer.cs" />
     <Compile Include="Cpu\Z80Disassembler.cs" />

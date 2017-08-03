@@ -5,24 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Emux"
         mc:Ignorable="d"
-        Title="ControlMapper" Height="300" Width="300">
+        Title="ControlMapper" Height="300" Width="300"
+        KeyUp="ControlKeyUp">
     <Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-        </Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label HorizontalAlignment="Center" Grid.Row="0">Up</Label>
+        <Button Grid.Row="0" Grid.Column="1" Margin="5" Click="SetListen" x:Name="keyUp">Up</Button>
+        <Label HorizontalAlignment="Center" Grid.Row="1">Down</Label>
+        <Button Grid.Row="1" Grid.Column="1" Margin="5" Click="SetListen" x:Name="keyDown">Down</Button>
+        <Label HorizontalAlignment="Center" Grid.Row="2">Left</Label>
+        <Button Grid.Row="2" Grid.Column="1" Margin="5" Click="SetListen" x:Name="keyLeft">Left</Button>
+        <Label HorizontalAlignment="Center" Grid.Row="3">Right</Label>
+        <Button Grid.Row="3" Grid.Column="1" Margin="5" Click="SetListen" x:Name="keyRight">Right</Button>
+        <Label HorizontalAlignment="Center" Grid.Row="4">A</Label>
+        <Button Grid.Row="4" Grid.Column="1" Margin="5" Click="SetListen" x:Name="keyA">A</Button>
+        <Label HorizontalAlignment="Center" Grid.Row="5">B</Label>
+        <Button Grid.Row="5" Grid.Column="1" Margin="5" Click="SetListen" x:Name="keyB">B</Button>
+        <Label HorizontalAlignment="Center" Grid.Row="6">Start</Label>
+        <Button Grid.Row="6" Grid.Column="1" Margin="5" Click="SetListen" x:Name="keyStart">X</Button>
+        <Label HorizontalAlignment="Center" Grid.Row="7">Select</Label>
+        <Button Grid.Row="7" Grid.Column="1" Margin="5" Click="SetListen" x:Name="keySelect">Z</Button>
+        <Button Click="Cancel" Grid.Row="8" Margin="5">Cancel</Button>
+        <Button Click="Save" Grid.Row="8" Grid.Column="1" Margin="5">Save</Button>
     </Grid>
 </Window>
