@@ -26,7 +26,10 @@ namespace Emux.GameBoy.Input
 
         private GameBoy vm;
         private Thread ioThread;
-
+        public static void Overwrite()
+        {
+            
+        }
         public IoManager(GameBoy vm)
         {
             this.vm = vm;
@@ -43,7 +46,7 @@ namespace Emux.GameBoy.Input
         public void Update()
         {
             while (true)
-            {
+            {                
                 foreach (GameBoyPadButton k in InputMap.Keys)
                 {
                     if (IsKeyDown(InputMap[k])) vm.KeyPad.PressedButtons |= k;

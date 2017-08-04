@@ -42,13 +42,20 @@ namespace Emux
             }
             else
             {
+                
+                List<Key> keyBindings = new List<Key>();
                 keyButtons.ForEach(btn =>
                 {
                     if (Enum.TryParse(btn.Content.ToString(), out Key key))
                     {
-                        //IoManager.InputMap[key] 
+                        keyBindings.Add(key);                        
                     }
                 });
+                int counter = 0;
+                foreach (GameBoyPadButton gbpb in IoManager.InputMap.Keys.ToList())
+                {
+                    IoManager.InputMap[gbpb] = keyBindings[counter++];
+                }
                 Hide();
             }
         }
