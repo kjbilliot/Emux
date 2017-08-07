@@ -1,6 +1,7 @@
 ﻿using Emux.GameBoy.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,13 +43,13 @@ namespace Emux
             }
             else
             {
-                
+                IoManager.IoBlockEvent.Reset();
                 List<Key> keyBindings = new List<Key>();
                 keyButtons.ForEach(btn =>
                 {
                     if (Enum.TryParse(btn.Content.ToString(), out Key key))
                     {
-                        keyBindings.Add(key);                        
+                        keyBindings.Add(key); 
                     }
                 });
                 int counter = 0;
@@ -57,7 +58,13 @@ namespace Emux
                     IoManager.InputMap[gbpb] = keyBindings[counter++];
                 }
                 Hide();
+                IoManager.IoBlockEvent.Set();
             }
+        }
+
+        public void OpenWindow()
+        {
+            Show();
         }
 
         private bool CheckForDuplicates()
@@ -72,6 +79,8 @@ namespace Emux
             }
             return false;
         }
+
+        
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
@@ -97,6 +106,12 @@ namespace Emux
                 activeSelection.Content = e.Key.ToString();
                 activeSelection = null;
             }
+        }
+
+        private void WndClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Visibility = Visibility.Hidden;
         }
     }
 }

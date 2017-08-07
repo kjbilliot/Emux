@@ -24,12 +24,11 @@ namespace Emux.GameBoy.Input
             {Select, Key.LeftShift },
         };
 
+        public static ManualResetEvent IoBlockEvent = new ManualResetEvent(true);
+
         private GameBoy vm;
         private Thread ioThread;
-        public static void Overwrite()
-        {
-            
-        }
+
         public IoManager(GameBoy vm)
         {
             this.vm = vm;
@@ -43,12 +42,15 @@ namespace Emux.GameBoy.Input
             ioThread.Abort();
         }
 
+        long t = 0;
         public void Update()
         {
             while (true)
-            {                
+            {
+                IoBlockEvent.WaitOne();
                 foreach (GameBoyPadButton k in InputMap.Keys)
                 {
+                    Console.WriteLine(t++);
                     if (IsKeyDown(InputMap[k])) vm.KeyPad.PressedButtons |= k;
                     else vm.KeyPad.PressedButtons &= ~k;
                 }
