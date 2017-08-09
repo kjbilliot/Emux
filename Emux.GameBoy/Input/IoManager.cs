@@ -12,16 +12,17 @@ namespace Emux.GameBoy.Input
 {
     public class IoManager
     {
-        public static Dictionary<GameBoyPadButton, Key> InputMap = new Dictionary<GameBoyPadButton, Key>()
+
+        public static Dictionary<GameBoyPadButton, GameBoyInputDefinition> InputMap = new Dictionary<GameBoyPadButton, GameBoyInputDefinition>()
         {
-            {Up,     Key.Up },
-            {Down,   Key.Down },
-            {Left,   Key.Left },
-            {Right,  Key.Right },
-            {A,      Key.X },
-            {B,      Key.Z },
-            {Start,  Key.Enter },
-            {Select, Key.LeftShift },
+            {Up,     new GameBoyInputDefinition(Key.Up)        },
+            {Down,   new GameBoyInputDefinition(Key.Down)      },
+            {Left,   new GameBoyInputDefinition(Key.Left)      },
+            {Right,  new GameBoyInputDefinition(Key.Right)     },
+            {A,      new GameBoyInputDefinition(Key.X)         },
+            {B,      new GameBoyInputDefinition(Key.Z)         },
+            {Start,  new GameBoyInputDefinition(Key.Enter)     },
+            {Select, new GameBoyInputDefinition(Key.LeftShift) },
         };
 
         public static ManualResetEvent IoBlockEvent = new ManualResetEvent(true);
@@ -38,6 +39,7 @@ namespace Emux.GameBoy.Input
             ioThread = new Thread(Update);
             ioThread.SetApartmentState(ApartmentState.STA);
             ioThread.Start();
+            XInputUtil.StartThread();
         }
 
         public void StopThread()
@@ -45,7 +47,6 @@ namespace Emux.GameBoy.Input
             ioThread.Abort();
         }
 
-        long t = 0;
         public void Update()
         {
             while (true)
@@ -53,8 +54,7 @@ namespace Emux.GameBoy.Input
                 IoBlockEvent.WaitOne();
                 foreach (GameBoyPadButton k in InputMap.Keys)
                 {
-                    Console.WriteLine(t++);
-                    if (IsKeyDown(InputMap[k])) vm.KeyPad.PressedButtons |= k;
+                    if (InputMap[k].IsPressed) vm.KeyPad.PressedButtons |= k;
                     else vm.KeyPad.PressedButtons &= ~k;
                 }
             }
