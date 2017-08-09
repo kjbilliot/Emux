@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Emux"
         mc:Ignorable="d"
         Title="ControlMapper" Height="300" Width="300"
-        KeyUp="ControlKeyUp">
+        KeyUp="ControlKeyUp" Closing="WndClosing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

@@ -261,7 +261,7 @@ namespace Emux
 
         private void ControlMapperCommandOnExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            _controlMapperWindow.Show();
+            _controlMapperWindow.OpenWindow();
         }
 
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
