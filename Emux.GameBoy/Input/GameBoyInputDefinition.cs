@@ -8,6 +8,7 @@ using System.Windows.Input;
 
 namespace Emux.GameBoy.Input
 {
+    [Serializable]
     public class GameBoyInputDefinition
     {
         public bool IsPressed

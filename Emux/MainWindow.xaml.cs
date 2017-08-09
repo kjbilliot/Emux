@@ -8,6 +8,10 @@ using System.Windows.Input;
 using Emux.GameBoy.Cartridge;
 using Emux.GameBoy.Cpu;
 using Microsoft.Win32;
+using System.Runtime.Serialization;
+using Emux.GameBoy.Input;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Generic;
 
 namespace Emux
 {
@@ -115,8 +119,19 @@ namespace Emux
             _videoWindow = new VideoWindow();
             _keypadWindow = new KeypadWindow();
             _controlMapperWindow = new ControlMapper();
+            LoadKeyBindings();
         }
-
+        private void LoadKeyBindings()
+        {
+            if (!File.Exists("inputMap.bin")) return;
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream("inputMap.bin",
+                                      FileMode.Open,
+                                      FileAccess.Read,
+                                      FileShare.Read);
+            IoManager.InputMap = (Dictionary<GameBoyPadButton, GameBoyInputDefinition>)formatter.Deserialize(stream);
+            stream.Close();
+        }
         public void RefreshView()
         {
             RegistersTextBox.Text = _gameBoy.Cpu.Registers + "\r\nTick: " + _gameBoy.Cpu.TickCount + "\r\n\r\n" +
