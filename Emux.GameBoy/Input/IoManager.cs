@@ -26,10 +26,6 @@ namespace Emux.GameBoy.Input
 
         private GameBoy vm;
         private Thread ioThread;
-        public static void Overwrite()
-        {
-            
-        }
         public IoManager(GameBoy vm)
         {
             this.vm = vm;
