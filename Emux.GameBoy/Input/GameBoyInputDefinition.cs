@@ -27,7 +27,7 @@ namespace Emux.GameBoy.Input
 
         public override string ToString()
         {
-            return _key != Key.None ? _key.ToString() : _flag.ToString();
+            return _key != Key.None ? _key.ToString() : "(XInput) " + _flag.ToString();
         }
     }
 }

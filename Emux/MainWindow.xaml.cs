@@ -119,18 +119,7 @@ namespace Emux
             _videoWindow = new VideoWindow();
             _keypadWindow = new KeypadWindow();
             _controlMapperWindow = new ControlMapper();
-            LoadKeyBindings();
-        }
-        private void LoadKeyBindings()
-        {
-            if (!File.Exists("inputMap.bin")) return;
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream("inputMap.bin",
-                                      FileMode.Open,
-                                      FileAccess.Read,
-                                      FileShare.Read);
-            IoManager.InputMap = (Dictionary<GameBoyPadButton, GameBoyInputDefinition>)formatter.Deserialize(stream);
-            stream.Close();
+            IoManager.LoadKeyBindings();
         }
         public void RefreshView()
         {

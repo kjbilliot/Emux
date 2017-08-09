@@ -39,6 +39,17 @@ namespace Emux
             keyButtons.ForEach(btn => originalValues.Add(btn, btn.Content.ToString()));
             XInputUtil.StartThread();
             XInputUtil.UpdateEvent += XInputUpdateHandler;
+            IoManager.LoadKeyBindings();
+            UpdateKeyBindText();
+        }
+
+        public void UpdateKeyBindText()
+        {
+            for (int i = 0; i < keyButtons.Count; i++)
+            {
+                string keyText = IoManager.InputMap.ElementAt(i).Value.ToString();
+                keyButtons[i].Content = keyText;
+            }
         }
 
         public void XInputUpdateHandler(State controllerState)

@@ -7,6 +7,9 @@ using System.Windows.Input;
 using static System.Windows.Input.Keyboard;
 using static Emux.GameBoy.Input.GameBoyPadButton;
 using System.Threading;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Emux.GameBoy.Input
 {
@@ -29,10 +32,7 @@ namespace Emux.GameBoy.Input
 
         private GameBoy vm;
         private Thread ioThread;
-        
-        
-           
-        
+
         public IoManager(GameBoy vm)
         {
             this.vm = vm;
@@ -40,6 +40,18 @@ namespace Emux.GameBoy.Input
             ioThread.SetApartmentState(ApartmentState.STA);
             ioThread.Start();
             XInputUtil.StartThread();
+        }
+
+        public static void LoadKeyBindings()
+        {
+            if (!File.Exists("inputMap.bin")) return;
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream("inputMap.bin",
+                                      FileMode.Open,
+                                      FileAccess.Read,
+                                      FileShare.Read);
+            IoManager.InputMap = (Dictionary<GameBoyPadButton, GameBoyInputDefinition>)formatter.Deserialize(stream);
+            stream.Close();
         }
 
         public void StopThread()
